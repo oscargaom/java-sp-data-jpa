@@ -1,0 +1,42 @@
+package com.bolsadeideas.springboot.datajpa.app.springbootdatajpa.models.service;
+
+import java.util.List;
+
+import com.bolsadeideas.springboot.datajpa.app.springbootdatajpa.models.dao.IClienteDao;
+import com.bolsadeideas.springboot.datajpa.app.springbootdatajpa.models.entity.Cliente;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service("clienteServiceJpa")
+public class ClienteServiceImpl implements IClienteService {
+
+
+    @Autowired
+    private IClienteDao clienteDao;
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        clienteDao.delete(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Cliente> findAll() {
+        return clienteDao.findAll();
+    }
+
+    @Override
+    @Transactional
+    public Cliente findOne(Long id) {
+        return clienteDao.findOne(id);
+    }
+
+    @Override
+    @Transactional
+    public void save(Cliente cliente) {
+        clienteDao.save(cliente);
+    }
+}
